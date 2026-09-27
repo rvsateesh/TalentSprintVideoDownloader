@@ -1,0 +1,7 @@
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-KEY:METHOD=AES-128,URI="key.bin"
+#EXTINF:1.0,
+segment1.ts
+#EXTINF:1.0,
+segment2.ts

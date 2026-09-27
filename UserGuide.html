@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TalentSprint Video Downloader - User Guide</title>
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --panel: #ffffff;
+            --primary: #1d4ed8;
+            --primary-dark: #153a9f;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --border: #dfe7f5;
+            --success: #0f766e;
+            --warning: #92400e;
+            --code: #111827;
+            --code-bg: #f3f4f6;
+            --shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 980px;
+            margin: 40px auto;
+            padding: 0 20px 60px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            padding: 34px 28px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+            line-height: 1.3;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: 2.2rem;
+        }
+
+        .subtitle {
+            margin: 0;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 26px;
+            margin-top: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        ul, ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        code, pre {
+            font-family: Consolas, "Courier New", monospace;
+        }
+
+        code {
+            background: var(--code-bg);
+            color: var(--code);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-size: 0.95em;
+        }
+
+        pre {
+            background: #111827;
+            color: #e5e7eb;
+            border-radius: 12px;
+            padding: 16px 18px;
+            overflow-x: auto;
+            margin: 14px 0;
+            border: 1px solid #1f2937;
+        }
+
+        .note {
+            background: #eef6ff;
+            border-left: 4px solid var(--primary);
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        .warning {
+            background: #fff7ed;
+            border-left: 4px solid var(--warning);
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        .success {
+            background: #ecfdf5;
+            border-left: 4px solid var(--success);
+            padding: 14px 16px;
+            border-radius: 8px;
+            margin: 18px 0;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #dbeafe;
+            color: var(--primary-dark);
+            font-weight: 700;
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 14px 40px;
+            }
+
+            .header {
+                padding: 24px 18px;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>TalentSprint Video Downloader</h1>
+            <p class="subtitle">A simple Python utility to inspect a TalentSprint lesson page and download direct video files or HLS streams.</p>
+        </header>
+
+        <section class="card">
+            <div class="badge">Step 1 - Prerequisites</div>
+            <h2>Requirements</h2>
+            <p>This project needs Python and a few libraries. The easiest setup is:</p>
+            <ol>
+                <li>Install Python 3.9+ on your system.</li>
+                <li>Open a terminal in the project folder.</li>
+                <li>Install project dependencies:</li>
+            </ol>
+            <pre><code>python -m pip install -r requirements.txt</code></pre>
+
+            <div class="note">
+                If you are on Windows, you can use a Command Prompt or PowerShell window. If you are using a virtual environment, activate it first before running the install command.
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="badge">Step 2 - Project Files</div>
+            <h2>What is inside the project</h2>
+            <p>The folder contains:</p>
+            <ul>
+                <li><strong>download_talentsprint.py</strong> – the main script that scans a TalentSprint lesson page and downloads the video.</li>
+                <li><strong>requirements.txt</strong> – Python packages required for the script.</li>
+                <li><strong>downloads/</strong> – default output directory for downloaded files.</li>
+                <li><strong>README.md</strong> – quick usage reference.</li>
+            </ul>
+            <p>Open your terminal in the same folder as the script and then run the commands below.</p>
+        </section>
+
+        <section class="card">
+            <div class="badge">Step 3 - Basic usage</div>
+            <h2>Download a lesson page</h2>
+            <p>To download media from a TalentSprint page, provide the lesson or page URL.</p>
+            <pre><code>python download_talentsprint.py "https://example.com/lesson" -o my_videos</code></pre>
+
+            <p>If the page requires login, send the cookie header too:</p>
+            <pre><code>python download_talentsprint.py "https://example.com/lesson" --cookie "sessionid=your_session_cookie" -o my_videos</code></pre>
+
+            <p>If you already saved your cookie in a text file, you can use that instead:</p>
+            <pre><code>python download_talentsprint.py "https://example.com/lesson" --cookie-file cookies.txt -o my_videos</code></pre>
+
+            <div class="warning">
+                The URL must be the full URL with <code>https://</code>. Do not use a placeholder or partial URL.
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="badge">Step 4 - Getting cookies</div>
+            <h2>How to get the authentication cookie</h2>
+            <p>If the TalentSprint lesson page is protected, you must use a valid login cookie. The script supports that through the <code>--cookie</code> or <code>--cookie-file</code> option.</p>
+            <ol>
+                <li>Open the TalentSprint site in your browser.</li>
+                <li>Log in normally.</li>
+                <li>Open browser Developer Tools: <strong>F12</strong>.</li>
+                <li>Go to the <strong>Application</strong> or <strong>Storage</strong> tab.</li>
+                <li>Select <strong>Cookies</strong> and open the TalentSprint domain.</li>
+                <li>Find the session cookie name such as <code>sessionid</code>, <code>connect.sid</code>, or similar.</li>
+                <li>Copy the value and pass it to the script.</li>
+            </ol>
+
+            <pre><code>--cookie "sessionid=abcd1234xyz"</code></pre>
+
+            <p>Example with multiple cookies:</p>
+            <pre><code>--cookie "sessionid=abcd1234xyz; csrftoken=xyz987; othercookie=value"</code></pre>
+        </section>
+
+        <section class="card">
+            <div class="badge">Step 5 - HLS / M3U8 videos</div>
+            <h2>Downloading an HLS stream</h2>
+            <p>If the page exposes an HLS playlist ending in <code>.m3u8</code>, the script uses FFmpeg to download the stream.</p>
+
+            <pre><code>python download_talentsprint.py "https://example.com/lesson-with-hls" --ffmpeg "C:\ffmpeg\bin\ffmpeg.exe" -o downloads</code></pre>
+
+            <p>If FFmpeg is installed and available in your PATH, you can simply run:</p>
+            <pre><code>python download_talentsprint.py "https://example.com/lesson-with-hls" -o downloads</code></pre>
+
+            <div class="success">
+                The script will detect candidate links such as <code>.mp4</code> or <code>.m3u8</code>, print them, and let you choose the correct source if more than one is found.
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="badge">Step 6 - Installing FFmpeg</div>
+            <h2>Install FFmpeg</h2>
+            <p>For HLS playlists, FFmpeg is recommended. Install it and ensure the <code>ffmpeg</code> command works in your terminal.</p>
+
+            <p><strong>Windows:</strong></p>
+            <ul>
+                <li>Download FFmpeg from <a href="https://www.ffmpeg.org/download.html" target="_blank" rel="noopener noreferrer">https://www.ffmpeg.org/download.html</a></li>
+                <li>Extract it and add the <code>bin</code> folder to PATH.</li>
+                <li>Verify by running:</li>
+            </ul>
+            <pre><code>ffmpeg -version</code></pre>
+
+            <p>If FFmpeg is not in PATH, pass the full path explicitly:</p>
+            <pre><code>python download_talentsprint.py "https://example.com/lesson-with-hls" --ffmpeg "C:\ffmpeg\bin\ffmpeg.exe"</code></pre>
+        </section>
+
+        <section class="card">
+            <div class="badge">Step 7 - Finding the correct URL</div>
+            <h2>Where to get the page or asset URL</h2>
+            <p>The script works best when you provide the actual page URL that contains the video. If the page loads the video through JavaScript or a CDN, the script may not find it automatically.</p>
+
+            <ol>
+                <li>Open the TalentSprint lesson in the browser.</li>
+                <li>Open Developer Tools (<strong>F12</strong>).</li>
+                <li>Go to the <strong>Network</strong> tab.</li>
+                <li>Filter for <code>m3u8</code>, <code>mp4</code>, or <code>video</code>.</li>
+                <li>Look for a direct media URL in the request list.</li>
+                <li>Copy the URL and use it in the command.</li>
+            </ol>
+
+            <pre><code>python download_talentsprint.py "https://cdn.example.com/video/master.m3u8" --cookie "sessionid=your_cookie"</code></pre>
+
+            <div class="note">
+                Sometimes the direct media URL requires the original page as Referrer. In that case, pass the page URL with the <code>--referer</code> option.
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="badge">Step 8 - Example command flow</div>
+            <h2>Typical workflow</h2>
+            <ol>
+                <li>Open the TalentSprint lesson.</li>
+                <li>Copy the lesson URL.</li>
+                <li>Log in and copy cookies if required.</li>
+                <li>Run the script with the URL and cookie.</li>
+                <li>Check which media source is found.</li>
+                <li>Let the script save the file in the output folder.</li>
+            </ol>
+
+            <pre><code>python -m pip install -r requirements.txt
+python download_talentsprint.py "https://talentsprint.example.com/lesson/123" --cookie "sessionid=abc123" -o downloads
+</code></pre>
+
+            <p>If the lesson is HLS-based:</p>
+            <pre><code>python download_talentsprint.py "https://talentsprint.example.com/lesson/123" --cookie "sessionid=abc123" --ffmpeg "C:\ffmpeg\bin\ffmpeg.exe" -o downloads
+</code></pre>
+        </section>
+
+        <section class="card">
+            <div class="badge">Step 9 - Troubleshooting</div>
+            <h2>If it does not work</h2>
+            <ul>
+                <li>Check that the URL uses <code>https://</code>.</li>
+                <li>Make sure you are logged in and your cookie is valid.</li>
+                <li>Use the browser Network tab to find the actual <code>.m3u8</code> or <code>.mp4</code> link.</li>
+                <li>If FFmpeg is missing, install it and add it to PATH.</li>
+                <li>If the page uses JavaScript-heavy content, you may need to copy the direct media URL manually and pass it to the script.</li>
+            </ul>
+
+            <div class="warning">
+                Some sites use DRM or protected media. If the stream is encrypted, the script may need additional credentials or a browser/player that supports the DRM flow. In that situation, direct scraping may not be possible.
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="badge">Quick summary</div>
+            <h2>Minimum command to try</h2>
+            <pre><code>python download_talentsprint.py "https://example.com/lesson" --cookie "sessionid=your_session_id" -o downloads</code></pre>
+
+            <p>For HLS videos:</p>
+            <pre><code>python download_talentsprint.py "https://example.com/lesson-with-hls" --cookie "sessionid=your_session_id" --ffmpeg "C:\ffmpeg\bin\ffmpeg.exe" -o downloads</code></pre>
+        </section>
+    </div>
+</body>
+</html>
